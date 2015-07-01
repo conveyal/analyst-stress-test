@@ -48,7 +48,6 @@ w = DictWriter(open('jobs.csv', 'w'), ['job', 'timeSeconds'])
 
 for origin, destination in jobs:
     print 'running job from %s to %s' % (origin, destination)
-    continue
 
     origins = readPointset(origin)
 
