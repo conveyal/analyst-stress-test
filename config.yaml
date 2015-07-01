@@ -1,0 +1,65 @@
+# Definitions of various cities, with OSM bounds, Census county identifiers and GTFS file locations
+
+portland:
+  # GTFS file(s)
+  gtfs:
+    - http://developer.trimet.org/schedule/gtfs.zip
+
+  # Bounds of OSM extract, also used to clip Census data
+  bounds:
+    north: 45.7599
+    south: 45.1540
+    east: -121.9496
+    west: -123.3202
+
+  census:
+    - 41051 # Multnomah County
+    - 41005 # Clackamas County
+
+# San Diego is a midsized urban area with an transit network of enormous geographic extent (albeit infrequent service)
+san-diego:
+  gtfs:
+    - http://www.sdmts.com/google_transit_files/google_transit.zip
+    - http://www.gonctd.com/google_transit.zip
+
+  bounds:
+    west: -117.27839963
+    east: -116.184457876
+    south: 32.5437029307
+    north: 33.2568868011
+
+  census:
+    - 06073 # San Diego County
+
+new-york-city:
+  gtfs:
+    - http://web.mta.info/developers/data/nyct/subway/google_transit.zip
+    - http://web.mta.info/developers/data/nyct/bus/google_transit_bronx.zip
+    - http://web.mta.info/developers/data/nyct/bus/google_transit_brooklyn.zip
+    - http://web.mta.info/developers/data/nyct/bus/google_transit_manhattan.zip
+    - http://web.mta.info/developers/data/nyct/bus/google_transit_queens.zip
+    - http://web.mta.info/developers/data/nyct/bus/google_transit_staten_island.zip
+    - http://web.mta.info/developers/data/lirr/google_transit.zip
+    - http://web.mta.info/developers/data/mnr/google_transit.zip
+    - http://trilliumtransit.com/transit_feeds/path-nj-us/path-nj-us.zip
+    # download the NJ Transit data and manually place it in your directory
+    - file://bus_data.zip
+    - file://rail_data.zip
+
+  bounds:
+    north: 41.0876
+    south: 40.4898
+    east: -73.4601
+    west: -74.3156
+
+  census:
+    - 36061 # New York County (Manhattan)
+    - 36005 # Bronx County
+    - 36081 # Queens County
+    - 36047 # Kings County (Brooklyn)
+    - 26085 # Richmond County (Staten Island)
+    - 36059 # Nassau County
+    - 36119 # Westchester County
+    - 34    # All of New Jersey (will be filtered by bounds)
+    - 09001 # Fairfield County, CT
+    - 09009 # New Haven County, CT
