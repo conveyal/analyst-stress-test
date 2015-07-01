@@ -44,6 +44,8 @@ def readPointset(psetId):
 
 baseJobId = uuid.uuid4().hex[1:5]
 
+w = DictWriter(open('jobs.csv', 'w'), ['job', 'timeSeconds'])
+
 for origin, destination in jobs:
     print 'running job from %s to %s' % (origin, destination)
     continue
@@ -91,6 +93,8 @@ for origin, destination in jobs:
     ]
 
     # post it to the broker
+    start = clock()
+
     r = urllib2.Request(broker + '/enqueue/jobs')
     r.add_data(json.dumps(req))
     r.add_header('Content-Type', 'application/json')
@@ -103,6 +107,7 @@ for origin, destination in jobs:
 
         r = requests.get(broker + '/status/' + jobId)
         if r.status_code == 404 or r.json()['completePoints'] == r.json['totalPoints']:
+            w.writerow(dict(timeSeconds=clock() - start, job=jobId))
             break
         else:
             print '%s / %s complete' % (r.json()['completePoints'], r.json['totalPoints'])
