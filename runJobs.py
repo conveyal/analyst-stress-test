@@ -61,7 +61,7 @@ for origin, destination in jobs:
             'includeTimes': False,
             'outputLocation': 'analyst-frankfurt-results',
             'profileRequest' :  {
-                "date":"2015-06-24",
+                "date":"2015-06-26",
                 "fromTime": 7 * 3600,
                 "toTime": 8 * 3600 +  (i % 60) * 60,
                 "accessModes":"WALK",
