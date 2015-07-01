@@ -5,6 +5,7 @@ from gzip import GzipFile
 import uuid
 import urllib2
 import yaml
+import requests
 from random import randint
 from time import time, sleep
 from sys import argv
@@ -95,3 +96,13 @@ for origin, destination in jobs:
     r.add_header('Content-Type', 'application/json')
 
     urllib2.urlopen(r).close()
+
+    # wait for job to complete
+    while True:
+        sleep(10)
+
+        r = requests.get(broker + '/status/' + jobId)
+        if r.status_code == 404 or r.json()['completePoints'] == r.json['totalPoints']:
+            break
+        else:
+            print '%s / %s complete' % (r.json()['completePoints'], r.json['totalPoints'])
