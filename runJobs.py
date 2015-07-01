@@ -21,10 +21,10 @@ jobs = []
 
 for graphId, graph in config.iteritems():
     # Many to many
-    jobs.append(('%s_full' % graphId, '%s_full' % graphId))
+    jobs.append(('%s_full' % graphId, '%s_full' % graphId, graphId))
 
     # vary the destination size
-    jobs.extend([('%s_0.05' % graphId, '%s_%s' % (graphId, wh)) for wh in ('0.05', '0.30', '0.60', 'full')])
+    jobs.extend([('%s_0.05' % graphId, '%s_%s' % (graphId, wh), graphId) for wh in ('0.05', '0.30', '0.60', 'full')])
 
 print 'running %s jobs' % len(jobs)
 
@@ -46,7 +46,7 @@ baseJobId = uuid.uuid4().hex[1:5]
 
 w = DictWriter(open('jobs.csv', 'w'), ['job', 'timeSeconds'])
 
-for origin, destination in jobs:
+for origin, destination, graphId in jobs:
     print 'running job from %s to %s' % (origin, destination)
 
     origins = readPointset(origin)
@@ -57,7 +57,7 @@ for origin, destination in jobs:
     req = [
         {
             'destinationPointsetId': destination,
-            'graphId': 'netherlands',
+            'graphId': graphId,
             'jobId': jobId,
             'id': 'feat%s' % i,
             'includeTimes': False,
