@@ -63,3 +63,16 @@ new-york-city:
     - 34    # All of New Jersey (will be filtered by bounds)
     - 09001 # Fairfield County, CT
     - 09009 # New Haven County, CT
+
+boston:
+  gtfs:
+    - http://www.mbta.com/uploadedfiles/MBTA_GTFS.zip
+
+  bounds:
+    west: -71.794888
+    east: -70.625616
+    south: 41.5808
+    north: 42.797837
+
+  census:
+    - 25 # Massachusetts is small, download the whole thing then filter
