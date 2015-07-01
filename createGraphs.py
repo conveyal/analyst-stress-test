@@ -63,3 +63,4 @@ for graphId, graph in config.iteritems():
     key = boto.s3.key.Key(bucket)
     key.key = graphId + '.zip'
     key.set_contents_from_filename(temp + graphId + '.zip')
+    print done
