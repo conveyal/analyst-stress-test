@@ -10,6 +10,7 @@ import uuid
 import requests
 import boto.s3
 from zipfile import ZipFile
+from os import environ
 
 temp = tempfile.mkdtemp() + '/'
 
@@ -46,7 +47,7 @@ for graphId, graph in config.iteritems():
 
         print '  retrieving OSM'
 
-        r = requests.get('http://osm.conveyal.com/vex/%s,%s,%s,%s.pbf' % (graph['bounds']['south'], graph['bounds']['west'], graph['bounds']['north'], graph['bounds']['east']), stream=True)
+        r = requests.get('%s/%s,%s,%s,%s.pbf' % (environ['VEX_SERVER'], graph['bounds']['south'], graph['bounds']['west'], graph['bounds']['north'], graph['bounds']['east']), stream=True)
 
         fn = temp + graphId + '.osm.pbf'
 
