@@ -15,6 +15,7 @@ portland:
   census:
     - 41051 # Multnomah County
     - 41005 # Clackamas County
+    - 41067 # Washington County
 
 # San Diego is a midsized urban area with an transit network of enormous geographic extent (albeit infrequent service)
 san-diego:
@@ -76,3 +77,4 @@ boston:
 
   census:
     - 25 # Massachusetts is small, download the whole thing then filter
+    - 44 # Rhode Island really is small
