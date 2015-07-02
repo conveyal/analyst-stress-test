@@ -82,9 +82,9 @@ for graphId, graph in config.iteritems():
     fn = '%s_full.json.gz' % graphId
     with GzipFile(temp + fn, 'w') as out:
         json.dump(pointset, out)
-        key = boto.s3.key.Key(bucket)
-        key.key = fn
-        key.set_contents_from_filename(temp + fn)
+    key = boto.s3.key.Key(bucket)
+    key.key = fn
+    key.set_contents_from_filename(temp + fn)
 
 
     # save the original geojson features
@@ -95,7 +95,8 @@ for graphId, graph in config.iteritems():
         fn = '%s_%.2f.json.gz' % (graphId, p)
         with GzipFile(temp + fn, 'w') as out:
             json.dump(pointset, out)
-            key = boto.s3.key.Key(bucket)
-            key.key = fn
-            key.set_contents_from_filename(temp + fn)
+
+        key = boto.s3.key.Key(bucket)
+        key.key = fn
+        key.set_contents_from_filename(temp + fn)
     print 'done'

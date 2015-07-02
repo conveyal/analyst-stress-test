@@ -31,7 +31,7 @@ print 'running %s jobs' % len(jobs)
 # Download needed pointsets
 s3 = boto.connect_s3()
 b = s3.get_bucket('analyst-dev-pointsets')
-for origin, destination in jobs:
+for origin, destination, graphId in jobs:
     b.get_key(origin + '.json.gz').get_contents_to_filename(origin + '.json.gz')
 
 
@@ -92,7 +92,7 @@ for origin, destination, graphId in jobs:
     ]
 
     # post it to the broker
-    start = clock()
+    start = time()
 
     r = urllib2.Request(broker + '/enqueue/jobs')
     r.add_data(json.dumps(req))
@@ -105,8 +105,8 @@ for origin, destination, graphId in jobs:
         sleep(10)
 
         r = requests.get(broker + '/status/' + jobId)
-        if r.status_code == 404 or r.json()['completePoints'] == r.json['totalPoints']:
-            w.writerow(dict(timeSeconds=clock() - start, job=jobId))
+        if r.status_code == 404 or r.json()[0]['remaining'] == 0:
+            w.writerow(dict(timeSeconds=time() - start, job=jobId))
             break
         else:
-            print '%s / %s complete' % (r.json()['completePoints'], r.json['totalPoints'])
+            print '%s complete, %s remain' % (r.json()[0]['complete'], r.json()[0]['remaining'])
