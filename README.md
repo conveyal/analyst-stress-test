@@ -20,3 +20,15 @@ Finally, start the jobs by running
     python runJobs.py config.yaml [broker-url]
 
 If omitted, the broker URL defaults to `http://localhost:9001`
+
+The Netherlands analysis was much more ad-hoc. I used the scripts in the `nl/` directory to process the BAG Compact database
+into a CSV and then sample from that CSV to create pointsets; each script has comments describing its use. I then manually
+gzipped the pointsets and uploaded them to s3. The graph bundle was also created manually and uploaded, and jobs were
+created by editing runJobs.py to not read a config file but instead to have hardwired jobs, like so:
+
+    jobs = [
+        ('netherlands5000', 'netherlands750000', 'netherlands'),
+        ...
+    ]
+
+where items in the tuple are origin pointset, destination pointset, and graph.
