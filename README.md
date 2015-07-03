@@ -32,3 +32,6 @@ created by editing runJobs.py to not read a config file but instead to have hard
     ]
 
 where items in the tuple are origin pointset, destination pointset, and graph.
+
+Statistics can be aggregated from an SQS queue into a CSV file (which is specified as the first argument to an Analyst Worker) using the
+aggregateStatistics.py script.
